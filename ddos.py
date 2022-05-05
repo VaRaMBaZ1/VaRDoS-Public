@@ -15,11 +15,9 @@ with open('useragent') as file:
 
 with open('proxyhttp') as file:
     proxy_http = ''.join(file.readlines()).strip().split('\n')
-os.remove("proxyhttp")
 
 with open('proxysocks') as file:
     proxy_socks = ''.join(file.readlines()).strip().split('\n')
-os.remove("proxysocks")
 
 # Запуск потоков
 
