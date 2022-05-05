@@ -56,7 +56,7 @@ def dos1(target):
             requests.post(target, headers=header2, proxies=proxiessocks)
         except:
             xxxx = xxxx + 1
-            print("Connection error" + x)
+            print("Connection error (" + xxxx + ")")
 
 
 def dos2(target):
