@@ -98,10 +98,10 @@ print("")
 print(colorama.Fore.YELLOW + "Starting threads...")
 if (proxyuseage == 1):
     for i in range(0, threads):
-        thr = threading.Thread(target=dos1, args=(url,))
+        thr = threading.Thread(target=dospause1, args=(url,))
         thr.start()
 else:
     for i in range(0, threads):
-        thr2 = threading.Thread(target=dos2, args=(url,))
+        thr2 = threading.Thread(target=dospause2, args=(url,))
         thr2.start()
 print(colorama.Fore.GREEN + "All threads are running!")
